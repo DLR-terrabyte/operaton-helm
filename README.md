@@ -35,7 +35,7 @@ The output should be something like:
 
 ```
 NAME                    CHART VERSION   APP VERSION     DESCRIPTION                 
-operaton/operaton       1.0.6           2.1.0           Helm chart for Operaton
+operaton/operaton       1.0.7           2.1.1           Helm chart for Operaton
 ```
 
 Note: The `--devel` flag includes development versions in the search results. Without this flag, only stable versions will be listed.
@@ -45,7 +45,7 @@ Note: The `--devel` flag includes development versions in the search results. Wi
 To install a specific version from the list above, use:
 
 ```shell
-helm install operaton operaton/operaton --version 1.0.6
+helm install operaton operaton/operaton --version 1.0.7
 ```
 
 In this example:

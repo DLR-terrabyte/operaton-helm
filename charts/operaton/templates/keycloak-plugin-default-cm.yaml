@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: keycloak-plugin-default
+data:
+  default.yml: |-
+{{ .Files.Get "files/keycloak-plugin/default.yml" | nindent 4 }}

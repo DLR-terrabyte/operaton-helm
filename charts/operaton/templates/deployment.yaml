@@ -92,10 +92,28 @@ spec:
               value: "{{ .Values.bpmEngine.autoDeployment }}"
             - name: OPERATON_BPM_HISTORY_LEVEL
               value: "{{ .Values.bpmEngine.historyLevel }}"
+            {{- if false }}
             - name: "OPERATON_BPM_ADMIN-USER_ID"
               value: "{{ .Values.bpmEngine.adminUser.username }}"
             - name: "OPERATON_BPM_ADMIN-USER_PASSWORD"
               value: "{{ .Values.bpmEngine.adminUser.password }}"
+            {{- else }} # either this or that, just one
+            - name: "KEYCLOAK_HOST"
+              value: "{{ .Values.keycloak.host }}"
+            - name: "KEYCLOAK_REALM"
+              value: "{{ .Values.keycloak.realm }}"
+            - name: "KEYCLOAK_ISSUER_URL"
+              value: "{{ .Values.keycloak.issuerUrl }}"
+            - name: "KEYCLOAK_ADMIN_URL"
+              value: "{{ .Values.keycloak.adminUrl }}"
+            - name: "KEYCLOAK_CLIENT_ID"
+              value: "{{ .Values.keycloak.clientId }}"
+            - name: "KEYCLOAK_CLIENT_SECRET"
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.keycloak.secretName }}
+                  key: {{ .Values.keycloak.secretKey }}
+            {{- end }}
           {{- if .Values.extraEnvs }}
           {{- with tpl (toYaml .Values.extraEnvs) . }}
             {{ . | nindent 12 }}

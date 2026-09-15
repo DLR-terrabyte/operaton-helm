@@ -21,11 +21,12 @@ commonLabels: {}
 
 image:
   repository: operaton/operaton
-  tag: 2.1.0
+  tag: 2.1.1
+  #tag: 2.2.0-M1
   pullPolicy: IfNotPresent
   pullSecrets: []
-  command: []
-  args: []
+  command: ["/bin/bash"]
+  args: ["-c", "/scripts/init.sh"]
 
 # Extra environment variables to customize the deployment.
 # For more details: https://github.com/operaton/operaton-docker
@@ -48,9 +49,10 @@ persistence:
 bpmEngine:
   autoDeployment: false
   historyLevel: ACTIVITY
-  adminUser:
-    username: demo
-    password: demo
+# TODO: conditional, vars, etc... :)
+#  adminUser:
+#    username: demo
+#    password: demo
 
 # By default H2 database is used, which is handy for demos and tests,
 # however, H2 is not supported in a clustered scenario.
@@ -188,15 +190,23 @@ resources:
     memory: 512Mi
 
 extraVolumeMounts:
-  []
-# - name: dummy-volume
-#   mountPath: /dummy/volume
+  - name: keycloak-plugin-init-sh
+    mountPath: /scripts
+    readOnly: true
+  - name: keycloak-plugin-default-yml
+    mountPath: /operaton/configuration/default.yml # important (single file mount)
+    subPath: default.yml # yes, also important (single file mount)
+    readOnly: true
 
 extraVolumes:
-  []
-# - name: dummy-volume
-  # hostPath:
-  # path: /tmp/dummy-volume
+  - name: keycloak-plugin-init-sh
+    configMap:
+      name: keycloak-plugin-init
+      defaultMode: 0755
+  - name: keycloak-plugin-default-yml
+    configMap:
+      name: keycloak-plugin-default
+      #defaultMode: 0755
 
 autoscaling:
   enabled: false
