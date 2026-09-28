@@ -24,10 +24,13 @@ image:
   repository: ghcr.io/eopterix/operaton-docker
   tag: 2.1.1
   #tag: 2.2.0-M1
-  pullPolicy: IfNotPresent
+  pullPolicy: Always
+  #pullPolicy: IfNotPresent
   pullSecrets: []
-  command: ["/bin/bash"]
-  args: ["-c", "/scripts/init.sh"]
+  command: []
+  args: []
+  #command: ["/bin/bash"]
+  #args: ["-c", "/scripts/init.sh"]
 
 # Extra environment variables to customize the deployment.
 # For more details: https://github.com/operaton/operaton-docker

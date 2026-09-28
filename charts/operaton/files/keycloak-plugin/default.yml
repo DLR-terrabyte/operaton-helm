@@ -21,6 +21,30 @@ plugin.identity.keycloak:
   useGroupPathAsOperatonGroupId: true
   administratorGroupName: operaton-admin
 
+# Spring Boot Security OAuth2 SSO
+spring.security.oauth2:
+  client:
+    registration:
+      keycloak:
+        provider: keycloak
+        client-id: ${plugin.identity.keycloak.clientId}
+        client-secret: ${plugin.identity.keycloak.clientSecret}
+        authorization-grant-type: authorization_code
+        redirect-uri: "{baseUrl}/{action}/oauth2/code/{registrationId}"
+        scope: openid, profile, email
+    provider:
+      keycloak:
+        issuer-uri: ${plugin.identity.keycloak.keycloakIssuerUrl}
+        authorization-uri: ${plugin.identity.keycloak.keycloakIssuerUrl}/protocol/openid-connect/auth
+        user-info-uri: ${plugin.identity.keycloak.keycloakIssuerUrl}/protocol/openid-connect/userinfo
+        token-uri: ${plugin.identity.keycloak.keycloakIssuerUrl}/protocol/openid-connect/token
+        jwk-set-uri: ${plugin.identity.keycloak.keycloakIssuerUrl}/protocol/openid-connect/certs
+        # set user-name-attribute one of:
+        # - sub                -> default; using keycloak ID as operaton user ID
+        # - email              -> useEmailAsOperatonUserId=true
+        # - preferred_username -> useUsernameAsOperatonUserId=true
+        user-name-attribute: preferred_username
+
 logging:
   level:
     org.springframework: DEBUG
@@ -28,4 +52,3 @@ logging:
     org.keycloak: DEBUG
     org.operaton: DEBUG
     org.springframework.web: DEBUG
-
