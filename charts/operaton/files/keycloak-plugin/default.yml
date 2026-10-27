@@ -13,8 +13,8 @@ spring.datasource:
   password: ${DB_PASSWORD:operaton}
 
 plugin.identity.keycloak:
-  keycloakIssuerUrl: ${KEYCLOAK_ISSUER_URL:http://keycloak:8080/auth/realms/operaton}
-  keycloakAdminUrl: ${KEYCLOAK_ADMIN_URL:http://keycloak:8080/auth/admin/realms/operaton}
+  keycloakIssuerUrl: ${KEYCLOAK_ISSUER_URL:http://keycloak:8080/auth/realms/eoepca}
+  keycloakAdminUrl: ${KEYCLOAK_ADMIN_URL:http://keycloak:8080/auth/admin/realms/eoepca}
   clientId: ${KEYCLOAK_CLIENT_ID:operaton-identity-service}
   clientSecret: ${KEYCLOAK_CLIENT_SECRET:operaton-keycloak-secret}
   useUsernameAsOperatonUserId: true
@@ -45,10 +45,10 @@ spring.security.oauth2:
         # - preferred_username -> useUsernameAsOperatonUserId=true
         user-name-attribute: preferred_username
 
-logging:
-  level:
-    org.springframework: DEBUG
-    org.springframework.security: DEBUG
-    org.keycloak: DEBUG
-    org.operaton: DEBUG
-    org.springframework.web: DEBUG
+#logging:
+#  level:
+#    org.springframework: DEBUG
+#    org.springframework.security: DEBUG
+#    org.keycloak: DEBUG
+#    org.operaton: DEBUG
+#    org.springframework.web: DEBUG

@@ -20,17 +20,17 @@ commonLabels: {}
 #  my-custom-label: my-value
 
 image:
-  #repository: operaton/operaton
-  repository: ghcr.io/eopterix/operaton-docker
-  tag: 2.1.1
+  repository: operaton/operaton
+  #repository: ghcr.io/eopterix/operaton-docker
+  tag: 2.2.0
   #tag: 2.2.0-M1
   pullPolicy: Always
   #pullPolicy: IfNotPresent
   pullSecrets: []
-  command: []
-  args: []
-  #command: ["/bin/bash"]
-  #args: ["-c", "/scripts/init.sh"]
+  #command: []
+  #args: []
+  command: ["/bin/bash"]
+  args: ["-c", "/scripts/init.sh"]
 
 # Extra environment variables to customize the deployment.
 # For more details: https://github.com/operaton/operaton-docker
