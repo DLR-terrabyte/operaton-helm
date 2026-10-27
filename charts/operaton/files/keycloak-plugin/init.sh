@@ -13,5 +13,5 @@ else
 fi
 echo "Starting Operaton..."
 cd /operaton
-/sbin/tini -- ./operaton.sh
+/sbin/tini -- ./operaton.sh --webapps --rest --oauth2
 
